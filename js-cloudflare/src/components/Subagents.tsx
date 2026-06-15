@@ -1,5 +1,8 @@
 "use client";
 
+import { useMemo } from "react";
+
+import type { BaseMessage } from "@langchain/core/messages";
 import type { SubagentDiscoverySnapshot } from "@langchain/langgraph-sdk/stream";
 import { useMessages, useStreamContext } from "@langchain/react";
 
@@ -24,6 +27,18 @@ function statusLabel(status: SubagentStatus) {
   if (status === "running") return "Running";
   if (status === "complete") return "Complete";
   return "Error";
+}
+
+/** The task prompt is shown separately; skip the matching human message. */
+function omitTaskHumanMessage(
+  messages: BaseMessage[],
+  taskInput?: string
+): BaseMessage[] {
+  const task = taskInput?.trim();
+  if (!task) return messages;
+  return messages.filter(
+    (message) => message.type !== "human" || message.text?.trim() !== task
+  );
 }
 
 /**
@@ -78,6 +93,10 @@ export function SubagentDetail({
 }) {
   const stream = useStreamContext<Agent>();
   const messages = useMessages(stream, snapshot);
+  const visibleMessages = useMemo(
+    () => omitTaskHumanMessage(messages, snapshot.taskInput),
+    [messages, snapshot.taskInput]
+  );
 
   return (
     <>
@@ -90,10 +109,10 @@ export function SubagentDetail({
 
       <MessageThread
         isLoading={snapshot.status === "running"}
-        messages={messages}
+        messages={visibleMessages}
       />
 
-      {snapshot.status === "running" && messages.length === 0 ? (
+      {snapshot.status === "running" && visibleMessages.length === 0 ? (
         <StreamingIndicator />
       ) : null}
     </>
