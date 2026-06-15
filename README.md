@@ -43,14 +43,7 @@ Server-side logic that tracks active runs, bridges commands to the agent, and fa
 
 ### 4. Chat frontend
 
-A browser UI wired to the protocol through `HttpAgentServerAdapter` — from [`@langchain/react`](https://www.npmjs.com/package/@langchain/react) or [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue). The client bootstraps thread state, submits messages, consumes the SSE stream, and renders tokens, tool calls, reasoning, and subagent activity.
-
-```mermaid
-flowchart LR
-  UI["Chat UI"] -->|HTTP + SSE| API["Protocol server"]
-  API --> Session["Session / registry"]
-  Session --> Agent["Agent + checkpointer"]
-```
+A browser UI wired to the protocol through `HttpAgentServerAdapter`, from [`@langchain/react`](https://www.npmjs.com/package/@langchain/react) or [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue). The client bootstraps thread state, submits messages, consumes the SSE stream, and renders tokens, tool calls, reasoning, and subagent activity.
 
 ## Examples
 
