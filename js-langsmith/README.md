@@ -1,149 +1,287 @@
 # Deploying a LangChain Agent with LangSmith + Vite
 
-A self-contained Vite + React chat demo with a LangChain **deep agent** backend deployed to [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment). The agent graph lives in `agent/` and is served by the LangGraph Agent Server; the UI in `src/` provides streaming chat, thread history, and subagent/tool-call rendering.
+This example gets you from a local checkout to a deployed LangChain deep agent with a working chat UI. The backend runs as a [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment), and the frontend is a Vite + React app that streams from it.
 
-One package — `pnpm install`, `pnpm dev` starts LangGraph and Vite together.
+Use this page when you want to run the agent locally, deploy it to LangSmith, and point the UI at the deployed Agent Server.
 
-The frontend talks to LangSmith's built-in [Agent Server](https://docs.langchain.com/langsmith/agent-server) API (`/threads`, `/runs`, …) through `@langchain/react`'s `StreamProvider` and the LangGraph SDK.
+## Start Here
 
-> [!NOTE]
-> **Two ways to ship this agent on LangSmith.** This example uses a **LangSmith Deployment**: you define the agent graph in code (`agent/`), deploy it to the LangGraph Agent Server, and the server exposes the `/threads` + `/runs` API your frontend streams from. For a **fully-managed** alternative — where LangChain hosts the agent and you deploy a declarative project (`agent.json` + `AGENTS.md` + subagents) instead of a graph — see [`../js-langsmith-managed`](../js-langsmith-managed).
->
-> | Use this example (LangSmith Deployment) when…           | Use [`js-langsmith-managed`](../js-langsmith-managed) (Managed Deep Agent) when… |
-> | ------------------------------------------------------- | -------------------------------------------------------------------------------- |
-> | You want full control over the graph, runtime, and middleware. | You want the least infrastructure — LangChain runs the agent for you.    |
-> | You ship custom code tools and bespoke graph logic.     | Your tools are MCP servers and behavior fits instructions + skills + subagents.  |
-> | You're already on LangGraph and want the standard Agent Server API. | You're in the Managed Deep Agents private preview and want a hosted agent fast. |
+### What you are deploying
 
-## Architecture
+A **LangSmith Deployment** runs a LangGraph graph on LangSmith's hosted Agent Server. In this example:
+
+- `agent/` contains the deep agent graph, subagents, middleware, and tools.
+- `langgraph.json` tells the LangGraph CLI which graph to serve and deploy.
+- `src/` contains the React chat UI.
+- The UI talks to the Agent Server API through the LangGraph SDK and `@langchain/react`.
+
+The deployed agent is a coordinator with two subagents:
+
+- `researcher` uses the local `search_web` tool.
+- `math-whiz` uses the local `calculator` tool.
+
+### How the pieces fit
 
 ```mermaid
-flowchart TB
-  subgraph vercel["Vercel (Vite build)"]
-    SPA["React SPA"]
-    SP["StreamProvider + useStreamContext"]
-    SPA --- SP
-  end
-
-  subgraph langsmith["LangSmith Deployment (agent/)"]
-    LG["Agent Server /threads /runs"]
-    AGT["createDeepAgent graph"]
-    LG --> AGT
-  end
-
-  SP -->|"LangGraph SDK"| LG
+flowchart LR
+  A["agent/<br/>createDeepAgent graph"] -->|"pnpm run deploy"| B["LangSmith Deployment<br/>Agent Server"]
+  C["React chat UI<br/>src/"] -->|"LangGraph SDK<br/>threads + streaming"| B
 ```
 
-| Piece            | Location | Deploy target                   |
-| ---------------- | -------- | ------------------------------- |
-| Deep agent graph | `agent/` | LangSmith (`pnpm deploy`)       |
-| Chat UI          | `src/`   | Vercel (`pnpm build` → `dist/`) |
+During local development, `pnpm run dev` starts both the LangGraph dev server and the Vite app. In production, LangSmith hosts the agent and Vercel hosts the static UI.
 
-## Deploy the agent to LangSmith
+### What you need
+
+- A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) with deployment access.
+- An OpenAI API key for the agent model.
+- `pnpm`.
+
+## Run Locally
+
+### 1. Install dependencies
 
 ```bash
 cd js-langsmith
-cp .env.example .env   # set OPENAI_API_KEY and LANGSMITH_API_KEY
 pnpm install
+```
+
+### 2. Create your local environment file
+
+```bash
+cp .env.example .env
+```
+
+Open `.env` and set:
+
+```bash
+OPENAI_API_KEY=<your OpenAI API key>
+```
+
+Leave `LANGSMITH_API_KEY` and `VITE_AGENT_API_URL` empty for local development. You only need `LANGSMITH_API_KEY` when deploying or testing the UI against a remote LangSmith deployment.
+
+### 3. Start the agent and UI with one command
+
+```bash
+pnpm run dev
+```
+
+This starts both processes:
+
+- LangGraph dev server at [http://localhost:2024](http://localhost:2024).
+- Vite dev server at [http://localhost:5173](http://localhost:5173).
+
+### 4. Open the chat
+
+Open [http://localhost:5173](http://localhost:5173). Try a prompt that uses both subagents:
+
+```text
+Research LangGraph streaming, and separately calculate 42 * 17.
+```
+
+When `VITE_AGENT_API_URL` is empty, the Vite app uses its local proxy at `/api/langgraph`, which forwards requests to the LangGraph dev server and avoids CORS issues.
+
+## Deploy In 5 Steps
+
+### 1. Confirm your environment
+
+Your `.env` must include:
+
+```bash
+OPENAI_API_KEY=<your OpenAI API key>
+LANGSMITH_API_KEY=<your LangSmith API key>
+```
+
+Optionally set a deployment name:
+
+```bash
+LANGSMITH_DEPLOYMENT_NAME=deployment-cookbook-agent
+```
+
+If `LANGSMITH_DEPLOYMENT_NAME` is unset, the deployment name defaults to the directory name.
+
+### 2. Deploy the agent to LangSmith
+
+```bash
 pnpm run deploy
 ```
 
-This runs [`langgraphjs deploy`](https://docs.langchain.com/langsmith/cli#deploy). Set `LANGSMITH_DEPLOYMENT_NAME` in `.env` to control the deployment name (defaults to the directory name).
-
-Copy the deployment **API URL** from the LangSmith UI (e.g. `https://your-app.us.langgraph.app`).
-
-LangSmith Deployment provides durable checkpoint storage in production. The in-memory `MemorySaver` in `agent/index.ts` is only used for local `langgraph dev`.
-
-## Deploy the frontend to Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-langsmith&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY&envDescription=LangSmith%20deployment%20URL%20and%20API%20key)
-
-1. Connect the repo in Vercel with **Root Directory** `js-langsmith`.
-2. Vercel auto-detects Vite — build output is `dist/`.
-3. Set environment variables:
-   - `VITE_AGENT_API_URL` — LangSmith deployment root URL, e.g. `https://your-app.us.langgraph.app`
-   - `LANGSMITH_API_KEY` — LangSmith API key (exposed to the build via `envPrefix`; preferably proxy through a backend instead)
-
-## CI/CD
-
-The agent deploys via GitHub Actions on pushes to `js-langsmith/agent/` (and root config files):
-
-| Workflow                                                                                          | Triggers on                 | Action                            |
-| ------------------------------------------------------------------------------------------------- | --------------------------- | --------------------------------- |
-| [`.github/workflows/deploy-langsmith-agent.yml`](../.github/workflows/deploy-langsmith-agent.yml) | Agent + root config changes | `langgraphjs deploy` to LangSmith |
-
-| Name                                            | Description                              |
-| ----------------------------------------------- | ---------------------------------------- |
-| `LANGSMITH_API_KEY`                             | LangSmith API key with deployment access |
-| `LANGSMITH_DEPLOYMENT_NAME` (optional variable) | Deployment name override                 |
-
-The frontend deploys through Vercel's Git integration.
-
-## Agent Server API
-
-| SDK call                                  | Purpose                               |
-| ----------------------------------------- | ------------------------------------- |
-| `client.threads.search()`                 | Thread sidebar                        |
-| `client.threads.create()` / `delete()`    | New / delete conversation             |
-| `StreamProvider` + `assistantId: "agent"` | Streaming chat, subagents, tool calls |
-
-See the [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref).
-
-## Local development
+This runs:
 
 ```bash
-cd js-langsmith
-cp .env.example .env   # OPENAI_API_KEY (+ LANGSMITH_API_KEY for deploy)
-pnpm install
-pnpm dev
+langgraphjs deploy
 ```
 
-`pnpm dev` starts both:
+The CLI uses `langgraph.json` to deploy the `agent` graph from `agent/index.ts`.
 
-- **LangGraph dev server** on [http://localhost:2024](http://localhost:2024)
-- **Vite** on [http://localhost:5173](http://localhost:5173)
+### 3. Copy the deployment API URL
 
-Open the Vite URL for the UI. Leave `VITE_AGENT_API_URL` unset — the client uses the Vite dev proxy at `/api/langgraph` (forwards to LangGraph on port 2024, avoiding CORS).
+After deploy, open the deployment in LangSmith and copy its **API URL**. It should look like:
 
-Individual processes:
-
-```bash
-pnpm dev:agent   # LangGraph only
-pnpm dev:web     # Vite only
+```text
+https://your-app.us.langgraph.app/
 ```
 
-To test against a remote LangSmith deployment, point the client at it in `.env`
-(it reuses the same `LANGSMITH_API_KEY` you deploy with — Vite exposes `LANGSMITH_`
-vars to the client via `envPrefix`):
+Use the root URL only. Do not add any API path suffix.
+
+### 4. Test the UI against the remote deployment
+
+Set `VITE_AGENT_API_URL` in `.env`:
 
 ```bash
 VITE_AGENT_API_URL=https://your-app.us.langgraph.app
-# LANGSMITH_API_KEY is already set above and is reused by the client.
 ```
+
+Then run the UI:
+
+```bash
+pnpm run dev
+```
+
+The browser client reuses `LANGSMITH_API_KEY` when talking to the remote deployment.
 
 > [!WARNING]
-> **API key in the browser.** Exposing `LANGSMITH_API_KEY` to the client ships your key in the built bundle — fine for a local demo, not for production. In a real app, proxy requests through your own backend with a custom `fetch` and never expose the key.
+> The demo exposes `LANGSMITH_API_KEY` to the browser bundle so the UI can call the LangSmith deployment directly. That is convenient for local testing, but not production-safe. For a real app, proxy requests through your own backend and keep the key server-side.
 
-## Project layout
+### 5. Deploy the frontend to Vercel
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-langsmith&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY&envDescription=LangSmith%20deployment%20URL%20and%20API%20key)
+
+In Vercel:
+
+1. Create a project from this repo.
+2. Set **Root Directory** to `js-langsmith`.
+3. Use the default Vite build. The build output is `dist/`.
+4. Set these environment variables:
+   - `VITE_AGENT_API_URL`: the LangSmith deployment root URL.
+   - `LANGSMITH_API_KEY`: the LangSmith API key used by the demo client.
+
+The agent is deployed separately with `pnpm run deploy`. The frontend deploy only hosts the React app.
+
+## Troubleshooting
+
+- `pnpm run dev` starts but the UI cannot connect: leave `VITE_AGENT_API_URL` empty for local dev, then restart `pnpm run dev`.
+- The agent fails to answer locally: confirm `OPENAI_API_KEY` is set in `.env`.
+- `pnpm run deploy` fails with an auth error: confirm `LANGSMITH_API_KEY` has deployment access.
+- The remote UI fails to connect: confirm `VITE_AGENT_API_URL` is the deployment root URL with no path suffix.
+- Threads disappear after restarting local dev: local `langgraph dev` uses the in-memory `MemorySaver`; LangSmith Deployment provides durable storage in production.
+- You changed files in `agent/` but production did not change: run `pnpm run deploy` again.
+
+## Learn The Project
+
+### Agent files
+
+The LangSmith backend lives in `agent/`:
+
+```text
+agent/
+├── index.ts       # createDeepAgent graph
+├── middleware.ts  # response middleware
+└── tools.ts       # custom code tools
 ```
+
+`agent/index.ts` exports the graph that LangGraph serves locally and LangSmith deploys:
+
+```ts
+export const agent = createDeepAgent({
+  model: coordinatorModel,
+  middleware: [stripReasoningReplay],
+  checkpointer,
+  subagents: [
+    // researcher and math-whiz
+  ],
+});
+```
+
+The local `MemorySaver` checkpointer is only used by `langgraph dev`. LangSmith Deployment replaces it with durable Postgres-backed storage in production without code changes.
+
+### LangGraph config
+
+`langgraph.json` points the CLI at the graph:
+
+```json
+{
+  "graphs": {
+    "agent": "./agent/index.ts:agent"
+  },
+  "env": ".env"
+}
+```
+
+The graph id is `agent`. The frontend uses that id as the assistant id when streaming.
+
+### Chat UI
+
+The React app in `src/` provides streaming chat, thread history, subagent rendering, and tool-call rendering.
+
+The frontend uses:
+
+- `client.threads.search()` for the thread sidebar.
+- `client.threads.create()` and `client.threads.delete()` for conversation management.
+- `StreamProvider` with `assistantId: "agent"` for streaming chat.
+
+See the [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref) for the underlying thread and streaming APIs.
+
+### Local commands
+
+Run both local processes:
+
+```bash
+pnpm run dev
+```
+
+Run them separately:
+
+```bash
+pnpm run dev:agent
+pnpm run dev:web
+```
+
+Build and preview the frontend:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+### CI/CD
+
+The agent deploys via GitHub Actions when files under `js-langsmith/agent/` or shared config files change:
+
+- Workflow: [`.github/workflows/deploy-langsmith-agent.yml`](../.github/workflows/deploy-langsmith-agent.yml)
+- Action: `langgraphjs deploy` to LangSmith.
+- Required secret: `LANGSMITH_API_KEY`.
+- Optional variable: `LANGSMITH_DEPLOYMENT_NAME`.
+
+The frontend deploys through Vercel's Git integration.
+
+### LangSmith Deployment vs. Managed Deep Agent
+
+This example is a **LangSmith Deployment**. You define the graph in code, deploy it to the LangGraph Agent Server, and stream from the standard Agent Server API.
+
+The sibling [`../js-langsmith-managed`](../js-langsmith-managed) example deploys the same agent as a **Managed Deep Agent**. In that version, LangChain hosts the agent runtime and you deploy declarative files like `agent.json`, `AGENTS.md`, and `subagents/`.
+
+Use this example when you want full control over graph code, middleware, custom code tools, checkpointing behavior, or the standard Agent Server API. Use [`../js-langsmith-managed`](../js-langsmith-managed) when you want the least infrastructure and your tools can come from MCP servers.
+
+## Project Layout
+
+```text
 js-langsmith/
 ├── package.json
 ├── langgraph.json
 ├── vite.config.ts
 ├── index.html
-├── tsconfig.json          # project references
-├── tsconfig.app.json      # src/ (React)
-├── tsconfig.node.json     # vite.config.ts + agent/
-├── agent/                 # deep agent graph (LangSmith backend)
-├── src/                   # Vite + React SPA
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── agent/                 # deep agent graph for LangSmith
+├── src/                   # Vite + React chat UI
 └── .env.example
 ```
 
 ## References
 
-- [`js-langsmith-managed`](../js-langsmith-managed) — the same agent deployed as a fully-managed Managed Deep Agent
 - [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment)
 - [LangGraph CLI](https://docs.langchain.com/langsmith/cli)
-- [Deep Agents going to production](https://docs.langchain.com/oss/javascript/deepagents/going-to-production)
 - [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref)
+- [Deep Agents going to production](https://docs.langchain.com/oss/javascript/deepagents/going-to-production)
+- [`js-langsmith-managed`](../js-langsmith-managed) for the same agent as a Managed Deep Agent
