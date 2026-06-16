@@ -10,5 +10,10 @@
     "hono": "^4.7.10",
     "langchain": "^1.4.4",
     "zod": "^4.4.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@langchain/core": "1.1.50-dev-1781580357424"
+    }
   }
 }

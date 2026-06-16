@@ -4,19 +4,22 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@langchain/core': 1.1.50-dev-1781580357424
+
 importers:
 
   .:
     dependencies:
       '@langchain/core':
-        specifier: 1.1.48
-        version: 1.1.48
+        specifier: 1.1.50-dev-1781580357424
+        version: 1.1.50-dev-1781580357424
       '@langchain/langgraph-sdk':
         specifier: ^1.9.20
-        version: 1.9.22(@langchain/core@1.1.48)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 1.9.22(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@langchain/react':
         specifier: ^1.0.20
-        version: 1.0.23(@langchain/core@1.1.48)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 1.0.23(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -300,14 +303,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@langchain/core@1.1.48':
-    resolution: {integrity: sha512-fQU6Guyb1pwc2fEplmA8FPbKfOMAofjnyJzExevro0FxEiuGHE18Ov/ZHmT9trWCDTZRI9eW1VIc6aChxV8pAQ==}
+  '@langchain/core@1.1.50-dev-1781580357424':
+    resolution: {integrity: sha512-sGMJNA3pTkgHg+sckx3oulH0W/j0AQpsMaAOQK5p124jjPnxZXTvZjBnKphoNJyzwbW3/NVQLY2oqbO3KhgFoQ==}
     engines: {node: '>=20'}
 
   '@langchain/langgraph-sdk@1.9.22':
     resolution: {integrity: sha512-DBKs9R2SGivlGqK/ZRTOUu39Q7Z+yRrG4PoTYLIWn7pqrLNhyZ4yZI/tEEEi/J0inpCuKfg/eydSwnRmPV/q3w==}
     peerDependencies:
-      '@langchain/core': ^1.1.48
+      '@langchain/core': 1.1.50-dev-1781580357424
       react: ^18 || ^19
       react-dom: ^18 || ^19
       svelte: ^4.0.0 || ^5.0.0
@@ -328,7 +331,7 @@ packages:
   '@langchain/react@1.0.23':
     resolution: {integrity: sha512-IuMZPGiLuEdfXIhzL5FZGcvh4OxvNPmW8U5b1R0Y6c63QiVqWRkurT1d1E5g42KASsGQghG3QwRClNJYKQQuig==}
     peerDependencies:
-      '@langchain/core': ^1.1.48
+      '@langchain/core': 1.1.50-dev-1781580357424
       react: ^18 || ^19
 
   '@rolldown/pluginutils@1.0.0-beta.27':
@@ -971,7 +974,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@langchain/core@1.1.48':
+  '@langchain/core@1.1.50-dev-1781580357424':
     dependencies:
       '@cfworker/json-schema': 4.1.1
       '@standard-schema/spec': 1.1.0
@@ -987,9 +990,9 @@ snapshots:
       - openai
       - ws
 
-  '@langchain/langgraph-sdk@1.9.22(@langchain/core@1.1.48)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@langchain/langgraph-sdk@1.9.22(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@langchain/core': 1.1.48
+      '@langchain/core': 1.1.50-dev-1781580357424
       '@langchain/protocol': 0.0.16
       '@types/json-schema': 7.0.15
       p-queue: 9.3.0
@@ -1000,10 +1003,10 @@ snapshots:
 
   '@langchain/protocol@0.0.16': {}
 
-  '@langchain/react@1.0.23(@langchain/core@1.1.48)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@langchain/react@1.0.23(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@langchain/core': 1.1.48
-      '@langchain/langgraph-sdk': 1.9.22(@langchain/core@1.1.48)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@langchain/core': 1.1.50-dev-1781580357424
+      '@langchain/langgraph-sdk': 1.9.22(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
     transitivePeerDependencies:
       - react-dom
