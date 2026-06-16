@@ -1,4 +1,0 @@
-{
-  "description": "Researches a topic and reports concise findings.",
-  "model": "openai:gpt-5.4-mini"
-}

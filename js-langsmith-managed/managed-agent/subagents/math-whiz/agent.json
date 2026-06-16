@@ -1,4 +1,0 @@
-{
-  "description": "Performs calculations and explains the result.",
-  "model": "openai:gpt-5.4-mini"
-}

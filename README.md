@@ -61,15 +61,6 @@ Each directory is a self-contained app with its own README, env setup, and deplo
       <sub>LangGraph Agent Server · UI on Vercel</sub>
     </td>
     <td align="center" width="33%">
-      <a href="./js-langsmith-managed">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v16/icons/langchaincorporate.svg" width="64" height="64" alt="LangSmith" />
-        <br />
-        <strong>Managed Deep Agent</strong>
-      </a>
-      <br />
-      <sub>Hosted by LangChain · private preview</sub>
-    </td>
-    <td align="center" width="33%">
       <a href="./js-cloudflare">
         <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@v11/icons/cloudflare.svg" width="64" height="64" alt="Cloudflare" />
         <br />

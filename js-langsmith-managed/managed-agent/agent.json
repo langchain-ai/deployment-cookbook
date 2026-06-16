@@ -1,8 +1,0 @@
-{
-  "name": "deployment-cookbook-coordinator",
-  "description": "Coordinator deep agent that delegates lookups to the researcher subagent and math to the math-whiz subagent, then combines their results into a short, labeled answer.",
-  "model": "openai:gpt-5.4-mini",
-  "backend": {
-    "type": "state"
-  }
-}
