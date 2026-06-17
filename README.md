@@ -43,7 +43,9 @@ Server-side logic that tracks active runs, bridges commands to the agent, and fa
 
 ### 4. Chat frontend
 
-A browser UI wired to the protocol through `HttpAgentServerAdapter`, from [`@langchain/react`](https://www.npmjs.com/package/@langchain/react) or [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue). The client bootstraps thread state, submits messages, consumes the SSE stream, and renders tokens, tool calls, reasoning, and subagent activity.
+A browser UI wired to the protocol through `HttpAgentServerAdapter`, from [`@langchain/react`](https://www.npmjs.com/package/@langchain/react), [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue), [`@langchain/svelte`](https://www.npmjs.com/package/@langchain/svelte) or [`@langchain/angular`](https://www.npmjs.com/package/@langchain/angular). The client bootstraps thread state, submits messages, consumes the SSE stream, and renders tokens, tool calls, reasoning, and subagent activity.
+
+These bindings ship no components of their own — they are UI-agnostic. Hooks like `useStream` return plain reactive state (messages, tool calls, loading flags, thread metadata) that you wire to whatever visual layer you prefer. The examples here use hand-rolled markup, but you can drop in any component library such as [AI Elements](https://elements.ai-sdk.dev/) or [Nuxt UI](https://ui.nuxt.com/), or hand rendering to a generative-UI framework like [OpenUI](https://www.openui.com/) or [CopilotKit](https://www.copilotkit.ai/). See the [frontend integrations overview](https://docs.langchain.com/oss/python/langchain/frontend/integrations/overview) for adapter patterns and trade-offs.
 
 ## Examples
 
