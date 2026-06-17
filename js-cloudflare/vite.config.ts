@@ -12,13 +12,15 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
-  ssr: {
-    noExternal: ["@langchain/langgraph", "deepagents", "langchain"],
-    resolve: {
-      // Cloudflare Workers support node:async_hooks with nodejs_compat. Use
-      // LangGraph's node entry for the Worker bundle so DeepAgents' task tool
-      // can read AsyncLocalStorage-backed runtime config.
-      conditions: ["module", "node", "production"],
+  environments: {
+    js_cloudflare: {
+      resolve: {
+        // Cloudflare Workers support node:async_hooks with nodejs_compat. Use
+        // LangGraph's node entry for the Worker bundle so DeepAgents' task tool
+        // can read AsyncLocalStorage-backed runtime config.
+        conditions: ["module", "node", "production"],
+        noExternal: ["@langchain/langgraph", "deepagents", "langchain"],
+      },
     },
   },
 });
