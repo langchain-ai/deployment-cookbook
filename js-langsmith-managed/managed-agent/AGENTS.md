@@ -7,4 +7,5 @@ You are a helpful coordinator.
 - You may run both subagents for a single request.
 
 After the subagents respond, combine their results into a short, clearly labeled
-final answer.
+final answer. When more than one subagent ran, use the `combined-report` skill to
+format that answer.

@@ -16,6 +16,7 @@ A **Managed Deep Agent** is a hosted deep agent. You do not run a LangGraph Agen
 - `agent.json` names the agent, model, and backend.
 - `AGENTS.md` gives the agent its instructions.
 - `subagents/` defines specialist agents the coordinator can delegate to.
+- `skills/` packages reusable procedures the agent loads on demand.
 - `tools.json` lists MCP-backed tools, if your agent needs tools.
 
 This project deploys the same cookbook agent pattern used elsewhere in this repo: a coordinator delegates research tasks to `researcher`, math tasks to `math-whiz`, then combines the results.
@@ -166,6 +167,11 @@ managed-agent/
 ├── agent.json
 ├── AGENTS.md
 ├── tools.json
+├── skills/
+│   └── combined-report/
+│       ├── SKILL.md
+│       └── templates/
+│           └── report.md
 └── subagents/
     ├── researcher/
     │   ├── agent.json
@@ -216,6 +222,26 @@ Example `tools.json`:
 ```
 
 Use `managed-agent/tools.json` for coordinator-level tools. Use `managed-agent/subagents/<name>/tools.json` for tools that should only be available to one subagent. Deploy validates referenced MCP server URLs before updating the hosted agent.
+
+### Skills are loaded on demand
+
+Skills package reusable procedures, domain knowledge, and reference assets that the agent reads only when a task needs them. Unlike tools, skills are not MCP-backed — they are plain files — so they are a good fit for a Managed Deep Agent that cannot run local code tools.
+
+Each skill is a directory under `skills/<name>/` containing a `SKILL.md` with YAML frontmatter (`name` and `description`) followed by markdown instructions. The skill directory can also hold supporting files such as templates, scripts, or reference docs, which deploy syncs recursively. Skills follow the [Agent Skills specification](https://agentskills.io/specification).
+
+Deep agents load skills with **progressive disclosure**: at startup the agent reads only each skill's `name` and `description` into its system prompt, then reads the full `SKILL.md` (and any files it references) only when a request matches that description. This keeps startup context small while still making rich capabilities available on demand.
+
+This project ships one skill, `combined-report`, which the coordinator uses to format a labeled final answer whenever more than one subagent ran. `managed-agent/AGENTS.md` tells the coordinator to reach for it, and its `templates/report.md` asset shows how supporting files travel with the skill:
+
+```text
+skills/
+└── combined-report/
+    ├── SKILL.md          # frontmatter + instructions (always discovered)
+    └── templates/
+        └── report.md     # supporting asset, read only when the skill loads
+```
+
+The demo prompt (`Research LangGraph streaming, and separately calculate 42 * 17.`) runs both subagents, so the coordinator activates this skill. In the chat UI you will see the agent read `SKILL.md` as a file-read tool call before it writes the formatted answer. Use `managed-agent/skills/` for coordinator-level skills and `managed-agent/subagents/<name>/skills/` for skills scoped to a single subagent.
 
 ### Chat UI
 
