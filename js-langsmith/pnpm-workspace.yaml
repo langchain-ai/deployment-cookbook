@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@langchain/*'
+  - langchain
+  - deepagents
