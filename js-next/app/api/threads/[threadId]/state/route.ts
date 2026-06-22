@@ -1,4 +1,4 @@
-import { getAgent } from "@/lib/server/registry";
+import { getAgentGraph } from "@/lib/server/registry";
 import {
   ThreadNotFoundError,
   getThreadState,
@@ -14,7 +14,7 @@ type Params = { params: Promise<{ threadId: string }> };
 export async function GET(_request: Request, { params }: Params) {
   const { threadId } = await params;
   try {
-    const state = await getThreadState(getAgent().graph, threadId);
+    const state = await getThreadState(getAgentGraph(), threadId);
     return Response.json(state);
   } catch (error) {
     if (error instanceof ThreadNotFoundError) {
@@ -36,7 +36,7 @@ export async function POST(request: Request, { params }: Params) {
     as_node?: string;
   };
   try {
-    const state = await updateThreadState(getAgent().graph, threadId, {
+    const state = await updateThreadState(getAgentGraph(), threadId, {
       values: body.values ?? null,
       checkpoint: body.checkpoint ?? null,
       asNode: body.as_node,

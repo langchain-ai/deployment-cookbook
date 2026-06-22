@@ -1,9 +1,18 @@
 import type { RunnableConfig } from "@langchain/core/runnables";
-import type { CompiledGraphType, MemorySaver } from "@langchain/langgraph";
+import type { MemorySaver } from "@langchain/langgraph";
+
+import type { Agent } from "$lib/server/agent";
 
 import { isRecord, sanitizeForJson } from "./serialize";
 
-export type LocalProtocolGraph = CompiledGraphType;
+/**
+ * Compiled LangGraph instance exposed through the custom protocol server.
+ *
+ * Typed from the deployed agent so `createDeepAgent` / `createAgent` graphs
+ * assign without casting. `CompiledGraphType` references the `CompiledGraph`
+ * class, which fails when multiple `@langchain/langgraph` copies are installed.
+ */
+export type LocalProtocolGraph = Agent["graph"];
 
 type StateSnapshot = Awaited<ReturnType<LocalProtocolGraph["getState"]>>;
 

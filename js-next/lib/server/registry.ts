@@ -2,6 +2,7 @@ import "server-only";
 
 import { agent, checkpointer } from "@/lib/agent";
 import { LocalThreadSession } from "./session";
+import type { LocalProtocolGraph } from "./threads";
 
 /**
  * Process-local registry for the agent and its per-thread sessions.
@@ -33,6 +34,11 @@ const registry: Registry = (globalForRegistry.__agentRegistry ??= {
 /** The shared, compiled agent (and its checkpointer). */
 export function getAgent() {
   return agent;
+}
+
+/** Graph handle typed for thread checkpoint routes. */
+export function getAgentGraph(): LocalProtocolGraph {
+  return agent.graph;
 }
 
 /** The shared checkpointer — the single source of truth for threads. */

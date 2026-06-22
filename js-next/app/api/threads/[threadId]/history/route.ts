@@ -1,4 +1,4 @@
-import { getAgent } from "@/lib/server/registry";
+import { getAgentGraph } from "@/lib/server/registry";
 import { ThreadNotFoundError, getThreadHistory } from "@/lib/server/threads";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export async function POST(request: Request, { params }: Params) {
     checkpoint?: Record<string, unknown>;
   };
   try {
-    const history = await getThreadHistory(getAgent().graph, threadId, {
+    const history = await getThreadHistory(getAgentGraph(), threadId, {
       limit: typeof body.limit === "number" ? body.limit : 10,
       before: body.before,
       metadata: body.metadata,

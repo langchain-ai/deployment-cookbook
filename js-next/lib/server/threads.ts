@@ -10,8 +10,9 @@ import "server-only";
  */
 
 import type { MemorySaver } from "@langchain/langgraph";
-import type { CompiledGraphType } from "@langchain/langgraph";
 import type { RunnableConfig } from "@langchain/core/runnables";
+
+import type { Agent } from "@/lib/agent";
 
 import { isRecord, sanitizeForJson } from "./serialize";
 
@@ -20,8 +21,12 @@ import { isRecord, sanitizeForJson } from "./serialize";
  *
  * Thread routes read and write checkpointed state through this graph's
  * checkpointer rather than maintaining a separate thread store.
+ *
+ * Typed from the deployed agent so `createDeepAgent` / `createAgent` graphs
+ * assign without casting. `CompiledGraphType` references the `CompiledGraph`
+ * class, which fails when multiple `@langchain/langgraph` copies are installed.
  */
-export type LocalProtocolGraph = CompiledGraphType;
+export type LocalProtocolGraph = Agent["graph"];
 
 type StateSnapshot = Awaited<ReturnType<LocalProtocolGraph["getState"]>>;
 
