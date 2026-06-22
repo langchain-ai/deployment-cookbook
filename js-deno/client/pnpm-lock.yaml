@@ -4,28 +4,25 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@langchain/core': 1.1.50-dev-1781580357424
-
 importers:
 
   .:
     dependencies:
       '@langchain/core':
-        specifier: 1.1.50-dev-1781580357424
-        version: 1.1.50-dev-1781580357424
+        specifier: 1.2.1
+        version: 1.2.1
       '@langchain/langgraph-sdk':
-        specifier: ^1.9.20
-        version: 1.9.22(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^1.9.24
+        version: 1.9.24(@langchain/core@1.2.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@langchain/react':
-        specifier: ^1.0.20
-        version: 1.0.23(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^1.0.25
+        version: 1.0.25(@langchain/core@1.2.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react:
-        specifier: 19.2.4
-        version: 19.2.4
+        specifier: 19.2.7
+        version: 19.2.7
       react-dom:
-        specifier: 19.2.4
-        version: 19.2.4(react@19.2.4)
+        specifier: 19.2.7
+        version: 19.2.7(react@19.2.7)
     devDependencies:
       '@types/react':
         specifier: ^19
@@ -303,14 +300,14 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@langchain/core@1.1.50-dev-1781580357424':
-    resolution: {integrity: sha512-sGMJNA3pTkgHg+sckx3oulH0W/j0AQpsMaAOQK5p124jjPnxZXTvZjBnKphoNJyzwbW3/NVQLY2oqbO3KhgFoQ==}
+  '@langchain/core@1.2.1':
+    resolution: {integrity: sha512-NNG/cC5FGuHDOAP56h0ddp8Rfk8p+othWzEK5RV9JIG6RvnF5vGa5r0AEGtKfQieed7s1kC42GuIzVOBvMBL/g==}
     engines: {node: '>=20'}
 
-  '@langchain/langgraph-sdk@1.9.22':
-    resolution: {integrity: sha512-DBKs9R2SGivlGqK/ZRTOUu39Q7Z+yRrG4PoTYLIWn7pqrLNhyZ4yZI/tEEEi/J0inpCuKfg/eydSwnRmPV/q3w==}
+  '@langchain/langgraph-sdk@1.9.24':
+    resolution: {integrity: sha512-WhM6QdxNipndQjl5nkvqnBt9Wl16oO2p0KiVhndAFLJMwO3bZLEx++lwtbqUFQu1sHyNxiWixgRGm8qZsuHCeA==}
     peerDependencies:
-      '@langchain/core': 1.1.50-dev-1781580357424
+      '@langchain/core': ^1.1.48
       react: ^18 || ^19
       react-dom: ^18 || ^19
       svelte: ^4.0.0 || ^5.0.0
@@ -325,13 +322,13 @@ packages:
       vue:
         optional: true
 
-  '@langchain/protocol@0.0.16':
-    resolution: {integrity: sha512-ws+J7MaHyhO5dG7f0vdyHQiUn9hoCnki0f3crJPa4MCTGzcRC39jYSCghyrGtBPYQnZbUQiGyRVpW3z3M8IpJg==}
+  '@langchain/protocol@0.0.18':
+    resolution: {integrity: sha512-XW1egQtPfsGI41w2AMZNFZrUIwFSQHTjVMZs0OaTpCAvht/QLoaPN8FQcsysMVypOhupG28J29yOorrc70otBQ==}
 
-  '@langchain/react@1.0.23':
-    resolution: {integrity: sha512-IuMZPGiLuEdfXIhzL5FZGcvh4OxvNPmW8U5b1R0Y6c63QiVqWRkurT1d1E5g42KASsGQghG3QwRClNJYKQQuig==}
+  '@langchain/react@1.0.25':
+    resolution: {integrity: sha512-DG1wx1EpcNSqmEUPwNdoIK5VPisYyNU8+bqqJCq/KyHb5n3tzporpgE860GrOUnTBGC6MQ33rUzcCzR4A9wztg==}
     peerDependencies:
-      '@langchain/core': 1.1.50-dev-1781580357424
+      '@langchain/core': ^1.1.48
       react: ^18 || ^19
 
   '@rolldown/pluginutils@1.0.0-beta.27':
@@ -597,8 +594,8 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  langsmith@0.7.8:
-    resolution: {integrity: sha512-4/UFcZB1JTsQoPrsOisOZRFdlvRjk1Wam9Hwz/ZchRDmnvojcNdefk5GAqjCz/lhaMSg8lWtKmJCFmcR/jBM6Q==}
+  langsmith@0.7.10:
+    resolution: {integrity: sha512-3EjJx9zGMzqF60eT9JADHF+Hn/T5ayTgEVp4d3M5yvJIJi3q6seX0p5jT8ecBCWBi1kIvvssWrcDxfwgSier7Q==}
     peerDependencies:
       '@opentelemetry/api': '*'
       '@opentelemetry/exporter-trace-otlp-proto': '*'
@@ -671,17 +668,17 @@ packages:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
-  react-dom@19.2.4:
-    resolution: {integrity: sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==}
+  react-dom@19.2.7:
+    resolution: {integrity: sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ==}
     peerDependencies:
-      react: ^19.2.4
+      react: ^19.2.7
 
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
-  react@19.2.4:
-    resolution: {integrity: sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==}
+  react@19.2.7:
+    resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
     engines: {node: '>=0.10.0'}
 
   rollup@4.62.0:
@@ -974,12 +971,12 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@langchain/core@1.1.50-dev-1781580357424':
+  '@langchain/core@1.2.1':
     dependencies:
       '@cfworker/json-schema': 4.1.1
       '@standard-schema/spec': 1.1.0
       js-tiktoken: 1.0.21
-      langsmith: 0.7.8
+      langsmith: 0.7.10
       mustache: 4.2.0
       p-queue: 6.6.2
       zod: 4.4.3
@@ -990,24 +987,24 @@ snapshots:
       - openai
       - ws
 
-  '@langchain/langgraph-sdk@1.9.22(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@langchain/langgraph-sdk@1.9.24(@langchain/core@1.2.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
-      '@langchain/core': 1.1.50-dev-1781580357424
-      '@langchain/protocol': 0.0.16
+      '@langchain/core': 1.2.1
+      '@langchain/protocol': 0.0.18
       '@types/json-schema': 7.0.15
       p-queue: 9.3.0
       p-retry: 7.1.1
     optionalDependencies:
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
 
-  '@langchain/protocol@0.0.16': {}
+  '@langchain/protocol@0.0.18': {}
 
-  '@langchain/react@1.0.23(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@langchain/react@1.0.25(@langchain/core@1.2.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
-      '@langchain/core': 1.1.50-dev-1781580357424
-      '@langchain/langgraph-sdk': 1.9.22(@langchain/core@1.1.50-dev-1781580357424)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react: 19.2.4
+      '@langchain/core': 1.2.1
+      '@langchain/langgraph-sdk': 1.9.24(@langchain/core@1.2.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react: 19.2.7
     transitivePeerDependencies:
       - react-dom
       - svelte
@@ -1217,7 +1214,7 @@ snapshots:
 
   json5@2.2.3: {}
 
-  langsmith@0.7.8:
+  langsmith@0.7.10:
     dependencies:
       p-queue: 6.6.2
 
@@ -1265,14 +1262,14 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  react-dom@19.2.4(react@19.2.4):
+  react-dom@19.2.7(react@19.2.7):
     dependencies:
-      react: 19.2.4
+      react: 19.2.7
       scheduler: 0.27.0
 
   react-refresh@0.17.0: {}
 
-  react@19.2.4: {}
+  react@19.2.7: {}
 
   rollup@4.62.0:
     dependencies:
