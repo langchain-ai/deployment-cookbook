@@ -15,7 +15,7 @@
     "@langchain/openai": "^1.5.2",
     "@langchain/protocol": "^0.0.18",
     "@langchain/react": "^1.0.25",
-    "deepagents": "https://pkg.pr.new/deepagents@8ec2941",
+    "deepagents": "^1.10.5",
     "langchain": "^1.5.1",
     "mathjs": "^15.2.0",
     "next": "16.2.9",
@@ -33,11 +33,6 @@
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
     "typescript": "^6"
-  },
-  "pnpm": {
-    "overrides": {
-      "@langchain/core": "1.1.50-dev-1781580357424"
-    }
   },
   "packageManager": "pnpm@11.8.0"
 }

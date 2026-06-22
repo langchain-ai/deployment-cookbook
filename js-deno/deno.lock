@@ -1,13 +1,13 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@langchain/core@^1.2.1": "1.2.1_openai@6.42.0__zod@4.4.3",
-    "npm:@langchain/langgraph@^1.4.5": "1.4.5_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3_zod@4.4.3",
-    "npm:@langchain/openai@^1.5.2": "1.5.2_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3",
+    "npm:@langchain/core@^1.2.1": "1.2.1_openai@6.44.0__zod@4.4.3",
+    "npm:@langchain/langgraph@^1.4.5": "1.4.5_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3_zod@4.4.3",
+    "npm:@langchain/openai@^1.5.2": "1.5.2_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3",
     "npm:@langchain/protocol@^0.0.18": "0.0.18",
-    "npm:deepagents@^1.10.5": "1.10.5_langsmith@0.7.10__openai@6.42.0___zod@4.4.3__zod@4.4.3",
-    "npm:hono@^4.7.10": "4.12.25",
-    "npm:langchain@^1.5.1": "1.5.1_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3",
+    "npm:deepagents@^1.10.5": "1.10.5_langsmith@0.7.10__openai@6.44.0___zod@4.4.3__zod@4.4.3",
+    "npm:hono@^4.7.10": "4.12.26",
+    "npm:langchain@^1.5.1": "1.5.1_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3",
     "npm:mathjs@^15.2.0": "15.2.0",
     "npm:zod@^4.4.3": "4.4.3"
   },
@@ -18,7 +18,7 @@
     "@cfworker/json-schema@4.1.1": {
       "integrity": "sha512-gAmrUZSGtKc3AiBL71iNWxDsyUC5uMaKKGdvzYsBoTW/xi42JQHl7eKV2OYzCUqvc+D2RCcf7EXY2iCyFIk6og=="
     },
-    "@langchain/core@1.2.1_openai@6.42.0__zod@4.4.3": {
+    "@langchain/core@1.2.1_openai@6.44.0__zod@4.4.3": {
       "integrity": "sha512-NNG/cC5FGuHDOAP56h0ddp8Rfk8p+othWzEK5RV9JIG6RvnF5vGa5r0AEGtKfQieed7s1kC42GuIzVOBvMBL/g==",
       "dependencies": [
         "@cfworker/json-schema",
@@ -30,13 +30,13 @@
         "zod"
       ]
     },
-    "@langchain/langgraph-checkpoint@1.1.2_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3": {
+    "@langchain/langgraph-checkpoint@1.1.2_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3": {
       "integrity": "sha512-m5Xd7W3G9JrlEhFZ5WAcqZPgE46R9gr1gFDFaVqEKeuwin3tgEp0jlPbru+iFXCug338DcQjFS/Kuuci21ydvw==",
       "dependencies": [
         "@langchain/core"
       ]
     },
-    "@langchain/langgraph-sdk@1.9.24_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3": {
+    "@langchain/langgraph-sdk@1.9.24_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3": {
       "integrity": "sha512-WhM6QdxNipndQjl5nkvqnBt9Wl16oO2p0KiVhndAFLJMwO3bZLEx++lwtbqUFQu1sHyNxiWixgRGm8qZsuHCeA==",
       "dependencies": [
         "@langchain/core",
@@ -46,7 +46,7 @@
         "p-retry"
       ]
     },
-    "@langchain/langgraph@1.4.5_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3_zod@4.4.3": {
+    "@langchain/langgraph@1.4.5_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3_zod@4.4.3": {
       "integrity": "sha512-V+o29JPBaMoK/e+8R/m81XaC8h5iNuwWymvgLFhXfJbf7E2xt2mQUkcVXTi4cudGRHbRd14kidCpfaQbfPoYCw==",
       "dependencies": [
         "@langchain/core",
@@ -57,7 +57,7 @@
         "zod"
       ]
     },
-    "@langchain/openai@1.5.2_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3": {
+    "@langchain/openai@1.5.2_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3": {
       "integrity": "sha512-En/QzXO3YFuaaZWQiGx0ZBNJMK3ipL/tz8F/PReG/63oV3wk2nz906QA8drYnd8r2/3NtSkbf3x/8qms5o6qTg==",
       "dependencies": [
         "@langchain/core",
@@ -107,7 +107,7 @@
     "decimal.js@10.6.0": {
       "integrity": "sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg=="
     },
-    "deepagents@1.10.5_langsmith@0.7.10__openai@6.42.0___zod@4.4.3__zod@4.4.3": {
+    "deepagents@1.10.5_langsmith@0.7.10__openai@6.44.0___zod@4.4.3__zod@4.4.3": {
       "integrity": "sha512-UFXoH3obz+/3ACuq515UHxXGiDQXHlXvK99ywZ2FSw/HrlrKwI0SKgd0damIj7Tpz7UYrCk4YRzufeDzaOEaQg==",
       "dependencies": [
         "@langchain/core",
@@ -161,8 +161,8 @@
         "is-glob"
       ]
     },
-    "hono@4.12.25": {
-      "integrity": "sha512-2NFaIyNVgJmBs/ecmtGzlmluTFs5cHEWGTdu0t1HBwYzoGXOL5nUQBRMXsXWla5i4KkG//QMzVP88m1+I3fdAQ=="
+    "hono@4.12.26": {
+      "integrity": "sha512-uyZtpnYxM9CmQ7QsQknM4zN8EftNqhON1qYeIKM0Se67CCEe2c44xyGURwB0axX2fBDu1dqHrHAc1hmNT8ITkw=="
     },
     "is-extglob@2.1.1": {
       "integrity": "sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ=="
@@ -188,7 +188,7 @@
         "base64-js"
       ]
     },
-    "langchain@1.5.1_@langchain+core@1.2.1__openai@6.42.0___zod@4.4.3": {
+    "langchain@1.5.1_@langchain+core@1.2.1__openai@6.44.0___zod@4.4.3": {
       "integrity": "sha512-Ik/eTZI7k5LOMG7pyrsrtSbGecmrZosNJXn41Qa4UO+WcdyKK2fXH1/SshaRoFPXB2Ki7gcC+4N+R/+P2eR8KQ==",
       "dependencies": [
         "@langchain/core",
@@ -198,7 +198,7 @@
         "zod"
       ]
     },
-    "langsmith@0.7.10_openai@6.42.0__zod@4.4.3_zod@4.4.3": {
+    "langsmith@0.7.10_openai@6.44.0__zod@4.4.3_zod@4.4.3": {
       "integrity": "sha512-3EjJx9zGMzqF60eT9JADHF+Hn/T5ayTgEVp4d3M5yvJIJi3q6seX0p5jT8ecBCWBi1kIvvssWrcDxfwgSier7Q==",
       "dependencies": [
         "openai",
@@ -237,8 +237,8 @@
       "integrity": "sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==",
       "bin": true
     },
-    "openai@6.42.0_zod@4.4.3": {
-      "integrity": "sha512-1WFEt/uXMXOLhYRNkgJWo08Y2YNvNwpVU72K7ibrWgWpNOXd4VojXLbe6SQ4bLiUQ3Y8jz4IiyVkylJCL1DtZg==",
+    "openai@6.44.0_zod@4.4.3": {
+      "integrity": "sha512-09/gH+8jH0RgUwsgWHAaxsKGRT5zVZ95IaJUnqAWj6XejIBmnFRwq2WUIF37VtDEsmGrtPmvCs5+yBSeZGWvkA==",
       "dependencies": [
         "zod"
       ],
