@@ -14,16 +14,16 @@
     "@langchain/core": "1.2.1",
     "@langchain/langgraph": "^1.4.5",
     "@langchain/langgraph-sdk": "^1.9.24",
-    "@langchain/openai": "^1.5.2",
+    "@langchain/openai": "^1.5.3",
     "@langchain/protocol": "^0.0.18",
     "@langchain/vue": "^1.0.25",
     "deepagents": "https://pkg.pr.new/deepagents@8ec2941",
-    "langchain": "^1.5.1",
+    "langchain": "^1.5.2",
     "mathjs": "^15.2.0",
     "nuxt": "^4.4.8",
     "vue": "^3.5.38",
     "vue-router": "^5.1.0",
     "zod": "^4.4.3"
   },
-  "packageManager": "pnpm@11.8.0"
+  "packageManager": "pnpm@11.9.0"
 }
