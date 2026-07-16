@@ -16,6 +16,9 @@ on:
           - js-next
           - js-nuxt
 
+permissions:
+  contents: read
+
 concurrency:
   group: deploy-agent-${{ inputs.project }}
   cancel-in-progress: false
