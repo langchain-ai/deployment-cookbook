@@ -13,28 +13,28 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json"
   },
   "dependencies": {
-    "@langchain/core": "1.2.1",
-    "@langchain/langgraph": "^1.4.7",
-    "@langchain/langgraph-sdk": "^1.9.25",
-    "@langchain/openai": "^1.5.3",
-    "@langchain/react": "^1.0.26",
+    "@langchain/core": "1.2.9",
+    "@langchain/langgraph": "^1.4.13",
+    "@langchain/langgraph-sdk": "^1.10.0",
+    "@langchain/openai": "^1.5.10",
+    "@langchain/react": "^1.0.33",
     "deepagents": "https://pkg.pr.new/deepagents@8ec2941",
-    "langchain": "^1.5.2",
+    "langchain": "^1.5.10",
     "mathjs": "^15.2.0",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
-    "zod": "^4.4.3"
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "^4.5.2"
   },
   "devDependencies": {
-    "@langchain/langgraph-cli": "^1.4.1",
+    "@langchain/langgraph-cli": "^1.4.5",
     "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.0.3",
-    "concurrently": "^10.0.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
     "typescript": "^6",
-    "vite": "^8.1.2",
-    "wait-on": "^9.0.10"
+    "vite": "^8.2.2",
+    "wait-on": "^9.1.0"
   },
   "packageManager": "pnpm@11.8.0"
 }
