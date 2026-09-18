@@ -1,0 +1,3 @@
+# Local environment files — never deploy or commit secrets.
+.env
+.env.*
