@@ -11,19 +11,19 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@langchain/core": "1.2.1",
-    "@langchain/langgraph": "^1.4.7",
-    "@langchain/langgraph-sdk": "^1.9.25",
-    "@langchain/openai": "^1.5.3",
-    "@langchain/protocol": "^0.0.18",
-    "@langchain/vue": "^1.0.26",
+    "@langchain/core": "1.2.9",
+    "@langchain/langgraph": "^1.4.14",
+    "@langchain/langgraph-sdk": "^1.10.2",
+    "@langchain/openai": "^1.5.11",
+    "@langchain/protocol": "^0.0.19",
+    "@langchain/vue": "^1.0.35",
     "deepagents": "https://pkg.pr.new/deepagents@8ec2941",
-    "langchain": "^1.5.2",
+    "langchain": "^1.5.10",
     "mathjs": "^15.2.0",
-    "nuxt": "^4.4.8",
-    "vue": "^3.5.39",
-    "vue-router": "^5.1.0",
-    "zod": "^4.4.3"
+    "nuxt": "^4.5.2",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.1",
+    "zod": "^4.5.4"
   },
   "packageManager": "pnpm@11.9.0"
 }
