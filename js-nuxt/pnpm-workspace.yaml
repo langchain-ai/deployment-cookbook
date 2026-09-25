@@ -5,3 +5,5 @@ minimumReleaseAgeExclude:
   - '@langchain/*'
   - langchain
   - deepagents
+overrides:
+  '@nuxt/devtools': 3.3.1
