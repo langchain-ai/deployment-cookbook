@@ -22,6 +22,7 @@
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "server-only": "^0.0.1",
+    "ws": "^8.21.3",
     "zod": "^4.5.2"
   },
   "devDependencies": {
@@ -32,7 +33,7 @@
     "eslint": "^10",
     "eslint-config-next": "16.3.3",
     "tailwindcss": "^4",
-    "typescript": "^6"
+    "typescript": "^7"
   },
   "packageManager": "pnpm@11.8.0"
 }
